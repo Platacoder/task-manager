@@ -1,0 +1,27 @@
+<div class="card">
+  @if(isBeingEdited) {
+  <div class="card-header">
+    <input [(ngModel)]="cardData.title" placeholder="Card Title" />
+  </div>
+  <div class="card-body">
+    <textarea
+      [(ngModel)]="cardData.description"
+      placeholder="Card description goes here."
+    ></textarea>
+  </div>
+  <div class="card-footer">
+    <button (click)="saveCard()">Save</button>
+  </div>
+  } @else {
+  <div class="card-header">
+    <p>{{ cardData.title }}</p>
+  </div>
+  <div class="card-body">
+    <p>{{ cardData.description }} </p>
+  </div>
+  <div class="card-footer">
+    <button (click)="editCard()">Edit</button>
+    <button (click)="deleteCard()">Delete</button>
+  </div>
+  }
+</div>
