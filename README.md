@@ -1,6 +1,12 @@
 # TaskTracker
 
-Simple app to track and manage task. Used to be under stand NgRx.
+Simple app to track and manage task. Used to better understand NgRx.
+
+
+
+### Design
+
+We will create a simple multi lane task system. Where the user is able to create a task, update task details, and move task to the three different lanes: TODO, In Progress, and Done.
 
 ## Development server
 
