@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Card, CardStatus } from '../../models/card-model';
 import { CardService } from '../services/card.service';
@@ -33,23 +33,37 @@ export class CardComponent {
    */
   @Input() cardData: Card;
   /**
+   * Event emitter to notify parent component
+   */
+  @Output() cardDeleted = new EventEmitter<Card>();
+  /**
+   * Event emitter to notify parent component
+   */
+  @Output() cardUpdated = new EventEmitter<Card>();
+  /**
    * Flag that tracks if card is being edited.
    */
   isBeingEdited = false;
-
   /**
    * Toggles the card status.
    */
   editCard() {
     this.isBeingEdited = true;
   }
-
-   
+  /**
+   * Emits event to save card.
+   */
   saveCard() {
-    // Implementation to save card info and add to the store.
+    this.cardUpdated.emit(this.cardData);
+  }
+  /**
+   * Emits event to delete
+   */
+  deleteCard() {
+    this.cardDeleted.emit(this.cardData);
   }
 
-  deleteCard() {
-    // Implementation delete the card from the store.
+  cancelEdit() {
+    this.isBeingEdited = false;
   }
 }

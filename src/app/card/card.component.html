@@ -1,27 +1,25 @@
 <div class="card">
   @if(isBeingEdited) {
-  <div class="card-header">
-    <input [(ngModel)]="cardData.title" placeholder="Card Title" />
+  <div class="card__header">
+    <input class="card__input" [(ngModel)]="cardData.title" placeholder="Card Title" />
   </div>
-  <div class="card-body">
-    <textarea
-      [(ngModel)]="cardData.description"
-      placeholder="Card description goes here."
-    ></textarea>
+  <div class="card__body">
+    <textarea class="card__textarea" [(ngModel)]="cardData.description" placeholder="Card description goes here."></textarea>
   </div>
-  <div class="card-footer">
-    <button (click)="saveCard()">Save</button>
+  <div class="card__footer">
+    <button class="card__button card__button--submit" (click)="saveCard()">Save</button>
+    <button class="card__button card__button--cancel" (click)="cancelEdit()">Cancel</button>
   </div>
   } @else {
-  <div class="card-header">
-    <p>{{ cardData.title }}</p>
+  <div class="card__header">
+    <p class="card__title">{{ cardData.title }}</p>
   </div>
-  <div class="card-body">
-    <p>{{ cardData.description }} </p>
+  <div class="card__body">
+    <p class="card__description">{{ cardData.description }}</p>
   </div>
-  <div class="card-footer">
-    <button (click)="editCard()">Edit</button>
-    <button (click)="deleteCard()">Delete</button>
+  <div class="card__footer">
+    <button class="card__button card__button--edit" (click)="editCard()">Edit</button>
+    <button class="card__button card__button--delete" (click)="deleteCard()">Delete</button>
   </div>
   }
 </div>

@@ -1,0 +1,78 @@
+/* filepath: /C:/Users/steve/Developer Files/Side Projects/task-tracker/src/app/card/card.component.scss */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+  
+    &__header {
+      margin-bottom: 10px;
+    }
+  
+    &__input,
+    &__textarea {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  
+    &__title {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  
+    &__description {
+      font-size: 1em;
+    }
+  
+    &__footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  
+    &__button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  
+      &--submit {
+        background-color: #007bff;
+        color: white;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+  
+      &--cancel {
+        background-color: #ccc;
+  
+        &:hover {
+          background-color: #999;
+        }
+      }
+  
+      &--edit {
+        background-color: #007bff;
+        color: white;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+  
+      &--delete {
+        background-color: #dc3545;
+        color: white;
+  
+        &:hover {
+          background-color: #c82333;
+        }
+      }
+    }
+  }
