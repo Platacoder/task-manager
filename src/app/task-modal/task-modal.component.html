@@ -1,0 +1,14 @@
+<div class="modal__overlay">
+    <div class="modal__content">
+      <span class="modal__close" (click)="closeModal()">&times;</span>
+      <h2 class="modal__header">New Task</h2>
+      <label class="modal__label" for="title">Title:</label>
+      <input class="modal__input" id="title" [(ngModel)]="taskTitle" placeholder="Task Title" />
+      <label class="modal__label" for="description">Description:</label>
+      <textarea class="modal__textarea" id="description" [(ngModel)]="taskDescription" placeholder="Task Description"></textarea>
+      <div class="modal__footer">
+        <button class="modal__button modal__button--submit" (click)="submitTask()">Submit</button>
+        <button class="modal__button modal__button--cancel" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>

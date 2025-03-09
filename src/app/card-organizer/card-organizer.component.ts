@@ -2,10 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Card, CardStatus } from '../../models/card-model';
 import { CardComponent } from '../card/card.component';
 import { CommonModule } from '@angular/common';
+import { TaskModalComponent } from '../task-modal/task-modal.component';
 
 @Component({
   selector: 'app-card-organizer',
-  imports: [CardComponent, CommonModule],
+  imports: [
+    CardComponent, 
+    CommonModule,
+    TaskModalComponent
+  ],
   templateUrl: './card-organizer.component.html',
   styleUrl: './card-organizer.component.scss'
 })
@@ -19,8 +24,33 @@ export class CardOrganizerComponent implements OnInit {
     done: [] as Card[]
   };
 
+  /**
+   * Flag to show/hide the modal.
+   */
+  showModal = false;
+
   ngOnInit(): void {
     this._loadMockData();
+  }
+
+  submitTask(task: Card) {
+    console.log(task);
+    this.cards.todo.push(task);
+    this.showModal = false;
+  }
+
+  /**
+   * Opens the modal to add a new task.
+   */
+  protected openModal() {
+    this.showModal = true;
+    console.log('Show Modal!');
+  }
+  /**
+   * Closes the modal.
+   */
+  protected closeModal() {
+    this.showModal = false;
   }
 
   /**

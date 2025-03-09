@@ -4,7 +4,9 @@ import { CardOrganizerComponent } from "./card-organizer/card-organizer.componen
 
 @Component({
   selector: 'app-root',
-  imports: [CardOrganizerComponent],
+  imports: [
+    CardOrganizerComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -1,0 +1,86 @@
+/* filepath: /C:/Users/steve/Developer Files/Side Projects/task-tracker/src/app/task-modal/task-modal.component.scss */
+.modal {
+
+    &__overlay {
+      display: block; /* Show the modal */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  
+    &__content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      position: relative;
+    }
+  
+    &__close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+  
+      &:hover,
+      &:focus {
+        color: black;
+        text-decoration: none;
+      }
+    }
+  
+    &__header {
+      margin-bottom: 20px;
+    }
+  
+    &__label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    &__input,
+    &__textarea {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  
+    &__footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  
+    &__button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  
+      &--submit {
+        background-color: #007bff;
+        color: white;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+  
+      &--cancel {
+        background-color: #ccc;
+  
+        &:hover {
+          background-color: #999;
+        }
+      }
+    }
+  }
