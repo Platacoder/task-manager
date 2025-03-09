@@ -5,15 +5,15 @@
 <div class="swim-lane-container">
     <div class="swim-lane">
       <h2>To Do</h2>
-      <app-card *ngFor="let card of cards.todo" [cardData]="card" ></app-card>
+      <app-card *ngFor="let card of cards.todo" [cardData]="card" (cardDeleted)="deleteTask($event)" ></app-card>
     </div>
     <div class="swim-lane">
       <h2>In Progress</h2>
-      <app-card *ngFor="let card of cards.inProgress" [cardData]="card" ></app-card>
+      <app-card *ngFor="let card of cards.inProgress" [cardData]="card" (cardDeleted)="deleteTask($event)" ></app-card>
     </div>
     <div class="swim-lane">
       <h2>Done</h2>
-      <app-card *ngFor="let card of cards.done" [cardData]="card" ></app-card>
+      <app-card *ngFor="let card of cards.done" [cardData]="card" (cardDeleted)="deleteTask($event)" ></app-card>
     </div>
 </div>
 <app-task-modal 

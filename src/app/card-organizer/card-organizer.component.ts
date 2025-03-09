@@ -54,6 +54,16 @@ export class CardOrganizerComponent implements OnInit {
   }
 
   /**
+   * Filters through all swim lanes to find the task with the given id and deletes it.
+   * @param task 
+   */
+  protected deleteTask(task: Card) {
+    this.cards.todo = this.cards.todo.filter(t => t.id !== task.id);
+    this.cards.inProgress = this.cards.inProgress.filter(t => t.id !== task.id);
+    this.cards.done = this.cards.done.filter(t => t.id !== task.id);
+  }
+
+  /**
    * Loads mock data so we can test the UI.
    */
   private _loadMockData() {
