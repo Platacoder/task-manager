@@ -33,10 +33,22 @@ export class CardOrganizerComponent implements OnInit {
     this._loadMockData();
   }
 
-  submitTask(task: Card) {
-    console.log(task);
+  protected submitTask(task: Card) {
     this.cards.todo.push(task);
     this.showModal = false;
+  }
+
+  protected updateTask(task: Card) {
+    console.log('Updating task:', task);
+
+    for (const key of Object.keys(this.cards)) {
+      const cardArray = this.cards[key as keyof typeof this.cards];
+      const index = cardArray.findIndex(card => card.id === task.id);
+      if (index !== -1) {
+        cardArray[index] = task;
+        break;
+      }
+    }
   }
 
   /**

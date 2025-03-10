@@ -13,25 +13,11 @@ import { CardService } from '../services/card.service';
 })
 export class CardComponent {
   /**
-   * Initializes the card services and the default card values.
-   * @param cardService the card service to be used.
-   */
-  constructor(
-    private cardService: CardService
-  ) {
-    this.cardData = {
-      id: this.cardService.generateRandomId(),
-      title: 'New Task',
-      description: 'Description for your task',
-      status: CardStatus.TODO
-    };
-  }
-  /**
    * Card data to be displayed.
    * If no data is provided, default
    * value will be used as this is a new card.
    */
-  @Input() cardData: Card;
+  @Input() cardData!: Card;
   /**
    * Event emitter to notify parent component
    */
@@ -45,16 +31,22 @@ export class CardComponent {
    */
   isBeingEdited = false;
   /**
-   * Toggles the card status.
+   * Simulates the caching card data before editing.
+   */
+  cachedCardData = {...this.cardData}
+  /**
+   * Toggles the card status and cache current card data.
    */
   editCard() {
+    this.cachedCardData = {...this.cardData}
     this.isBeingEdited = true;
   }
   /**
    * Emits event to save card.
    */
   saveCard() {
-    this.cardUpdated.emit(this.cardData);
+    this.cardUpdated.emit(this.cachedCardData);
+    this.isBeingEdited = false;
   }
   /**
    * Emits event to delete
@@ -64,6 +56,7 @@ export class CardComponent {
   }
 
   cancelEdit() {
+    this.cachedCardData = { ...this.cardData };
     this.isBeingEdited = false;
   }
 }

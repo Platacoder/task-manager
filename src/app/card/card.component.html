@@ -1,10 +1,10 @@
 <div class="card">
   @if(isBeingEdited) {
   <div class="card__header">
-    <input class="card__input" [(ngModel)]="cardData.title" placeholder="Card Title" />
+    <input class="card__input" [(ngModel)]="cachedCardData.title" placeholder="Card Title" />
   </div>
   <div class="card__body">
-    <textarea class="card__textarea" [(ngModel)]="cardData.description" placeholder="Card description goes here."></textarea>
+    <textarea class="card__textarea" [(ngModel)]="cachedCardData.description" placeholder="Card description goes here."></textarea>
   </div>
   <div class="card__footer">
     <button class="card__button card__button--submit" (click)="saveCard()">Save</button>
