@@ -1,5 +1,5 @@
 import { createAction, props} from '@ngrx/store';
-import { Card } from '../card/card.component';
+import { Card } from '../../models/card-model';
 
 export const loadTasks = createAction('[Card] Load Cards');
 export const loadCardsSuccess = createAction('[Card] Load Card Success', props<{ cards: Card[] }>());
