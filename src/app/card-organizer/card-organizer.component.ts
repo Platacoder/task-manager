@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Card, CardStatus } from '../../models/card-model';
+import { Card } from '../../models/card-model';
 import { CardComponent } from '../card/card.component';
 import { CommonModule } from '@angular/common';
 import { TaskModalComponent } from '../task-modal/task-modal.component';
+import { Store } from '@ngrx/store';
+import * as CardActions from '../state-management/card.action';
+import * as CardSelectors from '../state-management/card.selectors';
+import { Observable } from 'rxjs';
+import { selectInProgressCards } from '../state-management/card.selectors';
 
 @Component({
   selector: 'app-card-organizer',
@@ -16,39 +21,48 @@ import { TaskModalComponent } from '../task-modal/task-modal.component';
 })
 export class CardOrganizerComponent implements OnInit {
   /**
-   * Cards to be displayed in the UI.
+   * Observable for TODO cards.
    */
-  cards = {
-    todo: [] as Card[],
-    inProgress: [] as Card[],
-    done: [] as Card[]
-  };
-
+  $todoCards: Observable<Card[]>;
+  /**
+   * Observable for In Progress cards.
+   */
+  $inProgressCards: Observable<Card[]>;
+  /**
+   * Observable for Done cards.
+   */
+  $doneCards: Observable<Card[]>;
   /**
    * Flag to show/hide the modal.
    */
   showModal = false;
 
+  constructor (
+    private _store: Store
+  ){
+    this.$todoCards = this._store.select(CardSelectors.selectTodoCards);
+    this.$inProgressCards = this._store.select(selectInProgressCards);
+    this.$doneCards = this._store.select(CardSelectors.selectDoneCards);
+  }
+
+  /**
+   * Dispatches load cards action to initiate card request and load result to the Store.
+   */
   ngOnInit(): void {
-    this._loadMockData();
+    this._store.dispatch(CardActions.loadCards());
   }
 
   protected submitTask(task: Card) {
-    this.cards.todo.push(task);
+    this._store.dispatch(CardActions.addCard({card: task}));
     this.showModal = false;
   }
 
+  /**
+   * Updates task.
+   * @param task 
+   */
   protected updateTask(task: Card) {
-    console.log('Updating task:', task);
-
-    for (const key of Object.keys(this.cards)) {
-      const cardArray = this.cards[key as keyof typeof this.cards];
-      const index = cardArray.findIndex(card => card.id === task.id);
-      if (index !== -1) {
-        cardArray[index] = task;
-        break;
-      }
-    }
+    this._store.dispatch(CardActions.updateCard({card: task}));
   }
 
   /**
@@ -56,7 +70,6 @@ export class CardOrganizerComponent implements OnInit {
    */
   protected openModal() {
     this.showModal = true;
-    console.log('Show Modal!');
   }
   /**
    * Closes the modal.
@@ -70,26 +83,6 @@ export class CardOrganizerComponent implements OnInit {
    * @param task 
    */
   protected deleteTask(task: Card) {
-    this.cards.todo = this.cards.todo.filter(t => t.id !== task.id);
-    this.cards.inProgress = this.cards.inProgress.filter(t => t.id !== task.id);
-    this.cards.done = this.cards.done.filter(t => t.id !== task.id);
-  }
-
-  /**
-   * Loads mock data so we can test the UI.
-   */
-  private _loadMockData() {
-    this.cards.todo = [
-      { id: '1', title: 'Task 1', description: 'Description for Task 1', status: CardStatus.TODO },
-      { id: '2', title: 'Task 2', description: 'Description for Task 2', status: CardStatus.TODO }
-    ];
-    this.cards.inProgress = [
-      { id: '3', title: 'Task 3', description: 'Description for Task 3', status: CardStatus.IN_PROGRESS },
-      { id: '4', title: 'Task 4', description: 'Description for Task 4', status: CardStatus.IN_PROGRESS }
-    ];
-    this.cards.done = [
-      { id: '5', title: 'Task 5', description: 'Description for Task 5', status: CardStatus.DONE },
-      { id: '6', title: 'Task 6', description: 'Description for Task 6', status: CardStatus.DONE }
-    ];
+    this._store.dispatch(CardActions.deleteCard({id: task.id}));
   }
 }

@@ -6,7 +6,7 @@
   <div class="swim-lane">
     <h2>To Do</h2>
     <app-card
-      *ngFor="let card of cards.todo"
+      *ngFor="let card of $todoCards | async"
       [cardData]="card"
       (cardDeleted)="deleteTask($event)"
       (cardUpdated)="updateTask($event)"
@@ -15,7 +15,7 @@
   <div class="swim-lane">
     <h2>In Progress</h2>
     <app-card
-      *ngFor="let card of cards.inProgress"
+      *ngFor="let card of $inProgressCards | async"
       [cardData]="card"
       (cardDeleted)="deleteTask($event)"
       (cardUpdated)="updateTask($event)"
@@ -24,7 +24,7 @@
   <div class="swim-lane">
     <h2>Done</h2>
     <app-card
-      *ngFor="let card of cards.done"
+      *ngFor="let card of $doneCards | async"
       [cardData]="card"
       (cardDeleted)="deleteTask($event)"
       (cardUpdated)="updateTask($event)"
